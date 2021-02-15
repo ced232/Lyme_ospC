@@ -13,6 +13,7 @@ Created on Sun Feb  7 22:11:16 2021
 import csv
 import itertools
 import math
+import pandas as pd
 from scipy.stats import pearsonr
 import psycopg2
 
@@ -158,19 +159,13 @@ for i in [5, 7, 9]:
 
 conn.close()
 
+df = pd.DataFrame(all_r_values)  
+
 # ----------
 # Export to CSV
 # ----------
 
-with open('data/all_r_values.csv', mode = 'w') as csv_file:
-    fieldnames = ['invasive', 'window', 'position', 'r_value']
-    writer = csv.DictWriter(csv_file, fieldnames = fieldnames)
-    writer.writeheader()
-    for row in all_r_values:
-        writer.writerow(row)
-
-
-
+df.to_csv('data/all_r_values.csv', index = False, header = True)
 
 
 
