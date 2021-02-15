@@ -76,8 +76,8 @@ pgexec (conn, sequence_schema, None, "Create Table sequence")
 pgexec (conn, "DROP TABLE IF EXISTS cross_reactivity", None, "Reset Table cross_reactivity")
 
 cross_reactivity_schema = """CREATE TABLE IF NOT EXISTS cross_reactivity (
-                                            type1 CHAR(1), 
-                                            type2 CHAR(1),
+                                            type1 CHAR(2), 
+                                            type2 CHAR(2),
                                             cross_reac DECIMAL(3,2),
                                             PRIMARY KEY (type1, type2),
                                             FOREIGN KEY (type1) REFERENCES sequence(ospCType),
@@ -93,7 +93,7 @@ pgexec (conn, cross_reactivity_schema, None, "Create Table cross_reactivity")
 
 #populate AA sequence table:
 
-sequence_data = list(csv.DictReader(open('sequence_data.csv')))
+sequence_data = list(csv.DictReader(open('data/sequence_data.csv')))
 
 header_string = 'ospCType'
 for i in range (1,117):
@@ -112,7 +112,7 @@ for row in sequence_data:
 
 #populate cross-reactivity table:
     
-cross_reactivity_data = list(csv.DictReader(open('cross_reactivity_data.csv')))
+cross_reactivity_data = list(csv.DictReader(open('data/cross_reactivity_data.csv')))
 
 insert_stmt = "INSERT INTO cross_reactivity (type1, type2, cross_reac) VALUES (%(type1)s, %(type2)s, %(cross_reac)s)"
 
