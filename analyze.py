@@ -10,7 +10,6 @@ Created on Sun Feb  7 22:11:16 2021
 # Libraries
 # ----------
 
-import csv
 import itertools
 import math
 import pandas as pd
@@ -52,14 +51,14 @@ def allRValues (window, invasive = True):
     for i in range (5, 113):
         if invasive:
             new_dict = {}
-            new_dict['invasive'] = "yes"
+            new_dict['invasive'] = "invasive"
             new_dict['window'] = window
             new_dict['position'] = i
             new_dict['r_value'] = calculateRValueAtPosition(i, window, True)
             result_list.append(new_dict)
         else:
             new_dict = {}
-            new_dict['invasive'] = "no"
+            new_dict['invasive'] = "other"
             new_dict['window'] = window
             new_dict['position'] = i
             new_dict['r_value'] = calculateRValueAtPosition(i, window, False)
@@ -165,7 +164,7 @@ df = pd.DataFrame(all_r_values)
 # Export to CSV
 # ----------
 
-df.to_csv('data/all_r_values.csv', index = False, header = True)
+df.to_csv('visualize/all_r_values.csv', index = False, header = True)
 
 
 
